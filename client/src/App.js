@@ -11,15 +11,16 @@ function App() {
     setError('');
     setShortUrl('');
 
+    const apiUrl = 'http://localhost:8080';
     try {
-      const response = await fetch('http://localhost:8081/api/shorten', {
+      const response = await fetch(`${apiUrl}/api/shorten`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ longUrl }),
       });
       const data = await response.json();
       if (response.ok) {
-        setShortUrl(`http://localhost:8081/${data.shortCode}`);
+        setShortUrl(`${apiUrl}/${data.shortCode}`);
       } else {
         setError(data.error || 'An error occurred');
       }
